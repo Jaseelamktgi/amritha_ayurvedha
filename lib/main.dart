@@ -1,20 +1,27 @@
-import 'package:amritha_ayurvedha/presentation/screens/splash_screen.dart';
+import 'package:amritha_ayurvedha/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'presentation/providers/auth_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Amritha Ayurvedha',
-      theme: ThemeData(),
-      home: const SplashScreen(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.green),
+      home: const LoginScreen(),
     );
   }
 }
