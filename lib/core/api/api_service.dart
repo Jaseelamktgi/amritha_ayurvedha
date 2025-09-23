@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api_paths.dart';
+import 'dart:developer';
 
 class ApiService {
   late Dio _dio;
@@ -25,17 +26,28 @@ class ApiService {
             options.headers['Authorization'] = "Bearer $token";
           }
 
+          log(
+            'API Request: ${options.method} ${options.uri}\nHeaders: ${options.headers}\nData: ${options.data}',
+          );
+
           return handler.next(options);
         },
+        onResponse: (response, handler) {
+          log(
+            'API Response: ${response.statusCode} ${response.requestOptions.uri}\nData: ${response.data}',
+          );
+          return handler.next(response);
+        },
         onError: (error, handler) {
-          print("❌ API Error: ${error.message}");
+          log(
+            'API Error: ${error.message}\nURL: ${error.requestOptions.uri}\nData: ${error.response?.data}',
+          );
           return handler.next(error);
         },
       ),
     );
   }
 
-  // Singleton instance
   static final ApiService _instance = ApiService._internal();
   static ApiService get instance => _instance;
 
