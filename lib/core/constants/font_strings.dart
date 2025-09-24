@@ -12,5 +12,5 @@ abstract class AssetsHelper {
   static const String logo = '$images/logo.png';
   static const String splashBg = '$images/splash-bg.jpg';
   static const String loginImg = '$images/top-img.jpg';
-
+  static const String emptyList = '$images/empty-list.webp';
 }

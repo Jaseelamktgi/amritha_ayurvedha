@@ -17,7 +17,7 @@ class AppTextField extends StatelessWidget {
   final Color? txtColor, fillColor, borderColor;
   final double? borderWidth;
   final FocusNode? focusNode;
-  final double? horizontalPadding;
+  final double? horizontalPadding, radius;
   final bool autofocus;
 
   const AppTextField({
@@ -43,6 +43,7 @@ class AppTextField extends StatelessWidget {
     this.borderWidth,
     this.focusNode,
     this.autofocus = false,
+    this.radius,
   });
 
   @override
@@ -87,28 +88,28 @@ class AppTextField extends StatelessWidget {
           fontFamily: poppins400,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(radius?? 8),
           borderSide: BorderSide(
             color: borderColor ?? defaultBorderColor,
             width: borderWidth ?? 1.0,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
             color: borderColor ?? defaultBorderColor,
             width: borderWidth ?? 1.0,
           ),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
             color: borderColor ?? defaultBorderColor,
             width: borderWidth ?? 1.0,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
             color: borderColor ?? defaultBorderColor,
             width: borderWidth ?? 1.0,
