@@ -1,6 +1,7 @@
 import 'package:amritha_ayurvedha/core/constants/font_strings.dart';
 import 'package:amritha_ayurvedha/core/extensions/margin_extn.dart';
 import 'package:amritha_ayurvedha/presentation/providers/treatment_provider.dart';
+import 'package:amritha_ayurvedha/presentation/screens/register_patient_screen.dart';
 import 'package:amritha_ayurvedha/presentation/widgets/app_button.dart';
 import 'package:amritha_ayurvedha/presentation/widgets/app_text.dart';
 import 'package:amritha_ayurvedha/presentation/widgets/app_textfiled.dart';
@@ -259,7 +260,14 @@ class TreatmentScreen extends StatelessWidget {
                   radius: 9,
                   bgColor: const Color(0xFF006837),
                   color: Colors.white,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterPatientScreen(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
