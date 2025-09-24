@@ -1,6 +1,8 @@
+import 'package:amritha_ayurvedha/core/pdf_service.dart';
 import 'package:amritha_ayurvedha/data/models/patient_model.dart';
 import 'package:amritha_ayurvedha/data/repositories/register_patient_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:printing/printing.dart';
 
 class RegisterPatientProvider with ChangeNotifier {
   final RegisterPatientRepository repository;
@@ -47,12 +49,11 @@ class RegisterPatientProvider with ChangeNotifier {
   }) async {
     if (selectedBranch == null || selectedLocation == null) return false;
 
-    // Convert date to API format
     final DateTime now = DateTime.now();
     final formattedDate =
         "$dateNdTime-${now.hour}:${now.minute} ${now.hour >= 12 ? 'PM' : 'AM'}";
 
-    return await repository.registerPatient(
+    final success = await repository.registerPatient(
       name: name,
       excecutive: "Admin",
       payment: selectedPayment,
@@ -69,5 +70,43 @@ class RegisterPatientProvider with ChangeNotifier {
       branch: selectedBranch!.id.toString(),
       treatments: treatments,
     );
+
+    if (success) {
+      final pdfFile = await PdfGenerator.generatePatientPdf(
+        name: name,
+        address: address,
+        phone: phone,
+        bookedOn:
+            "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year} | ${now.hour}:${now.minute}${now.hour >= 12 ? 'PM' : 'AM'}",
+        treatmentDate: dateNdTime.split('-').first,
+        treatmentTime: dateNdTime.split('-').last,
+        treatments: [
+          {
+            "treatment": "Panchakarma",
+            "price": 230,
+            "male": 4,
+            "female": 4,
+            "total": 2540,
+          },
+          {
+            "treatment": "Njavara Kizhi Treatment",
+            "price": 230,
+            "male": 4,
+            "female": 4,
+            "total": 2540,
+          },
+        ],
+        totalAmount: totalAmount,
+        discount: discountAmount,
+        advance: advanceAmount,
+        balance: balanceAmount,
+      );
+
+      await Printing.layoutPdf(
+        onLayout: (format) async => pdfFile.readAsBytesSync(),
+      );
+    }
+
+    return success;
   }
 }
