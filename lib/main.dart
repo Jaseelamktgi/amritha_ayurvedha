@@ -7,6 +7,7 @@ import 'package:amritha_ayurvedha/presentation/providers/register_patient_provid
 import 'package:amritha_ayurvedha/presentation/providers/treatment_provider.dart';
 import 'package:amritha_ayurvedha/presentation/screens/home_screen.dart';
 import 'package:amritha_ayurvedha/presentation/screens/register_patient_screen.dart';
+import 'package:amritha_ayurvedha/presentation/screens/splash_screen.dart';
 import 'package:amritha_ayurvedha/presentation/screens/treatment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
       title: 'Amritha Ayurvedha',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }

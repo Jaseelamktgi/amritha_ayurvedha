@@ -46,6 +46,7 @@ class RegisterPatientScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
           leading: GestureDetector(
             onTap: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back_ios, size: 24),
@@ -493,7 +494,6 @@ class RegisterPatientScreen extends StatelessWidget {
                               content: Text("Patient registered successfully"),
                             ),
                           );
-                          // TODO: Generate PDF here using Figma format
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -505,7 +505,7 @@ class RegisterPatientScreen extends StatelessWidget {
                     },
                   ),
 
-                  30.hBox,
+                  45.hBox,
                 ],
               ),
             ),
@@ -648,7 +648,7 @@ class TreatmentItem extends StatelessWidget {
             ],
           ),
         ),
-        // Close icon at top-right
+
         Positioned(
           top: 16,
           right: 10,
